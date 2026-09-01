@@ -8,6 +8,8 @@ public class Telas {
 	
 	List<String> logs = new ArrayList<String>();
 	Boolean estaLogado = false;
+	String user = "admin";
+	String passkey = "123";
 
 	public void ImprimirMensagens(Integer mensagem) {
 		if (mensagem == null || mensagem < 0) {
@@ -16,6 +18,7 @@ public class Telas {
 		
 		switch (mensagem) {
 		case 1: {
+			System.out.println("");
 			System.out.println("---< Bem Vindo a Indie Lens! >---");
 			System.out.println("Selecione uma das opções a baixo para continuar:");
 			System.out.println("1. Acessar Página Institucional");
@@ -26,7 +29,20 @@ public class Telas {
 			System.out.print("Seleção: ");
 			break;
 		}
+		
+		case 3: {
+			System.out.println("-----< Quem nós somos? >-----");
+			System.out.println("O projeto consiste no desenvolvimento de uma plataforma web de inteligência de mercado voltada para o setor de jogos digitais independentes:");	
+			System.out.println("Utilizando um dataset histórico contendo aproximadamente 130 mil registros da plataforma Steam,");
+			System.out.println("o sistema tem como objetivo transformar dados brutos em indicadores, comparações e recomendações estratégicas");
+			System.out.println("para apoiar a tomada de decisão no ciclo de desenvolvimento de novos jogos");
+			System.out.println("-----------------------------");
+			System.out.println("Digite 1 para retornar a tela principal");
+			System.out.print("Seleção: ");
+			break;
+		}
 		case 4: {
+			System.out.println("");
 			System.out.println("---< Bem Vindo de Volta! >---");
 			System.out.println("Selecione a opção a qual deseja realizar:");
 			System.out.println("1. Login");
@@ -37,8 +53,17 @@ public class Telas {
 			break;
 		}
 		case 5: {
+			System.out.println("");
 			System.out.println("---< Bem Vindo de Volta! >---");
 			System.out.println("Para realizar o Login Insira seu email:");
+			System.out.println("-----------------------------");
+			System.out.print("email: ");
+			break;
+		}
+		case 6: {
+			System.out.println("");
+			System.out.println("---< Bem Vindo a IndieLens! >---");
+			System.out.println("Para realizar o cadastro Insira seu email:");
 			System.out.println("-----------------------------");
 			System.out.print("email: ");
 			break;
@@ -89,22 +114,46 @@ public class Telas {
 	}
 	
 	public void telaSobreNos() {
-		System.out.println("Work in progress");		
+		Scanner leitorSobre = new Scanner(System.in);
+		boolean opcaoCorreta = true;
+		
+		ImprimirMensagens(3);
+		
+		while (opcaoCorreta) {
+			Integer opcao = leitorSobre.nextInt();
+			
+			if (opcao == 1) {
+				opcaoCorreta = false;
+			} else {
+				System.err.println("opção Inválida, tente novamente");
+				System.out.println("Digite 1 para retornar a tela principal");
+				System.out.print("Seleção: ");
+			}
+			
+		}
 	}
 
 	public void Conta() {
-		Telas tela = new Telas();
 		Scanner leitorConta = new Scanner(System.in);
 		ImprimirMensagens(4);
 		Integer opcaoConta = leitorConta.nextInt();
 		
 		switch (opcaoConta) {
 		case 1: {
-			login(leitorConta);
+			if (estaLogado) {
+				System.out.println("Você já está logado!");
+			} else {
+				login(leitorConta);
+				
+			}
 			break;
 		}
 		case 2: {
-			System.out.println("Cadastro");
+			if (estaLogado) {
+				System.out.println("Você já está logado!");
+			} else {
+				cadastro(leitorConta);
+			}
 			break;
 		}
 		case 3: {
@@ -118,28 +167,60 @@ public class Telas {
 	}
 	
 	public void login(Scanner leitorConta) {
-		if (estaLogado) {
-			System.err.println("Você já está logado!");
-			telaPrincipal();
+		ImprimirMensagens(5);
+		String usuario = leitorConta.next();
+		
+		System.out.println("Agora Insira sua Senha:");
+		System.out.println("-----------------------------");
+		System.out.print("senha: ");
+		
+		String senha = leitorConta.next();
+		
+		if (usuario.equals(user) && senha.equals(passkey)) {
+			estaLogado = true;
+			System.out.println("-----------------------------");
+			System.out.println("Bem vindo " + usuario);
+			System.out.println("");
 		} else {
-			ImprimirMensagens(5);
-			String usuario = leitorConta.next();
-			
-			System.out.println("Agora Insira sua Senha:");
+			System.err.println("usuario inválido");
+		}
+		
+	}
+	
+	public void cadastro(Scanner leitorConta) {
+		ImprimirMensagens(6);
+		String usuario = leitorConta.next();
+		Boolean senhasDiferentes = true;
+		String senha = null;
+		
+		System.out.println("Agora Insira uma Senha:");
+		System.out.println("-----------------------------");
+		System.out.print("senha: ");
+		
+		while (senhasDiferentes) {
+			senha = leitorConta.next();
+			System.out.println("Confirme sua senha:");
 			System.out.println("-----------------------------");
 			System.out.print("senha: ");
+				
+			String senhaconfirmacao = leitorConta.next();
 			
-			String senha = leitorConta.next();
-			
-			if (usuario.equals("admin") && senha.equals("123")) {
-				estaLogado = true;
-				System.out.println("-----------------------------");
-				System.out.println("Bem vindo " + usuario);
-				System.out.println("");
+			if (senha.equals(senhaconfirmacao)) {
+				senhasDiferentes = false;
 			} else {
-				System.err.println("usuario inválido");
+				System.err.println("As senhas não coincidem, tente novamente");
+				System.out.println("----------------------------------------");
+				System.out.println("Insira sua Senha:");
+				System.out.println("-----------------------------");
+				System.out.print("senha: ");
 			}
 		}
+		
+		user = usuario;
+		passkey = senha;
+		
+		login(leitorConta);
+		
 	}
 	
 	public void gerarLog() {
