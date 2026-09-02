@@ -1,6 +1,7 @@
 package com.indielens;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -286,7 +287,10 @@ public class Telas {
 		
 		LocalDateTime dataHora = LocalDateTime.now();
 		
-		String mensagem = "[" + dataHora + "] : Usuário " + informacao + ";";
+		DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+		String textoFormatado = dataHora.format(formatador); 
+		
+		String mensagem = "[" + textoFormatado + "] : Usuário " + informacao + ";";
 		logs.add(mensagem);
 	}
 	
