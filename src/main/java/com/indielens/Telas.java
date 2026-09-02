@@ -30,12 +30,25 @@ public class Telas {
 			break;
 		}
 		
+		case 2: {
+			System.out.println("-----< Institucional >-----");
+			System.out.println("A IndieLens é uma plataforma de inteligência de mercado projetada para transformar dados brutos da indústria de games em decisões estratégicas.");	
+			System.out.println("A partir da análise de mais de 130 mil registros da Steam,");
+			System.out.println("temos como objetivo transformar dados brutos em indicadores, comparações e recomendações estratégicas");
+			System.out.println("para apoiar a tomada de decisão no ciclo de desenvolvimento de novos jogos");
+			System.out.println("-----------------------------");
+			System.out.println("Digite 1 para retornar a tela principal");
+			System.out.print("Seleção: ");
+			break;
+		}
+		
 		case 3: {
 			System.out.println("-----< Quem nós somos? >-----");
-			System.out.println("O projeto consiste no desenvolvimento de uma plataforma web de inteligência de mercado voltada para o setor de jogos digitais independentes:");	
-			System.out.println("Utilizando um dataset histórico contendo aproximadamente 130 mil registros da plataforma Steam,");
-			System.out.println("o sistema tem como objetivo transformar dados brutos em indicadores, comparações e recomendações estratégicas");
-			System.out.println("para apoiar a tomada de decisão no ciclo de desenvolvimento de novos jogos");
+			System.out.println("Nosso objetivo é guiar desenvolvedores independentes na criação e posicionamento de seus títulos com menor risco comercial,");	
+			System.out.println("além de auxiliar criadores de conteúdo e streamers a identificar nichos em ascensão longe da saturação dos grandes estúdios.");
+			System.out.println("");
+			System.out.println("> Tome Decisões criativas, agora orientadas por dados.");
+			System.out.println("");
 			System.out.println("-----------------------------");
 			System.out.println("Digite 1 para retornar a tela principal");
 			System.out.print("Seleção: ");
@@ -110,7 +123,24 @@ public class Telas {
 	}
 	
 	public void telaInstitucional() {
-		System.out.println("Work in progress");
+		Scanner leitorInst = new Scanner(System.in);
+		boolean opcaoCorreta = true;
+		
+		ImprimirMensagens(2);
+		
+		while (opcaoCorreta) {
+			Integer opcao = leitorInst.nextInt();
+			
+			if (opcao == 1) {
+				opcaoCorreta = false;
+			} else {
+				System.err.println("opção Inválida, tente novamente");
+				System.out.println("Digite 1 para retornar a tela principal");
+				System.out.print("Seleção: ");
+			}
+			
+		}
+		
 	}
 	
 	public void telaSobreNos() {
@@ -224,7 +254,8 @@ public class Telas {
 	}
 	
 	public void gerarLog() {
-		
+		String mensagem = "";
+		logs.add(mensagem);
 	}
 	
 	public void invocarLogs() {
