@@ -1,5 +1,6 @@
 package com.indielens;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,6 +19,7 @@ public class Telas {
 		
 		switch (mensagem) {
 		case 1: {
+			gerarLog("acessou seleção de página");
 			System.out.println("");
 			System.out.println("---< Bem Vindo a Indie Lens! >---");
 			System.out.println("Selecione uma das opções a baixo para continuar:");
@@ -31,6 +33,7 @@ public class Telas {
 		}
 		
 		case 2: {
+			gerarLog("acessou página Institucional");
 			System.out.println("-----< Institucional >-----");
 			System.out.println("A IndieLens é uma plataforma de inteligência de mercado projetada para transformar dados brutos da indústria de games em decisões estratégicas.");	
 			System.out.println("A partir da análise de mais de 130 mil registros da Steam,");
@@ -43,6 +46,7 @@ public class Telas {
 		}
 		
 		case 3: {
+			gerarLog("acessou página sobre nós");
 			System.out.println("-----< Quem nós somos? >-----");
 			System.out.println("Nosso objetivo é guiar desenvolvedores independentes na criação e posicionamento de seus títulos com menor risco comercial,");	
 			System.out.println("além de auxiliar criadores de conteúdo e streamers a identificar nichos em ascensão longe da saturação dos grandes estúdios.");
@@ -55,6 +59,7 @@ public class Telas {
 			break;
 		}
 		case 4: {
+			gerarLog("acessou página de contas");
 			System.out.println("");
 			System.out.println("---< Bem Vindo de Volta! >---");
 			System.out.println("Selecione a opção a qual deseja realizar:");
@@ -66,6 +71,7 @@ public class Telas {
 			break;
 		}
 		case 5: {
+			gerarLog("iniciou login");
 			System.out.println("");
 			System.out.println("---< Bem Vindo de Volta! >---");
 			System.out.println("Para realizar o Login Insira seu email:");
@@ -74,6 +80,7 @@ public class Telas {
 			break;
 		}
 		case 6: {
+			gerarLog("iniciou cadastro");
 			System.out.println("");
 			System.out.println("---< Bem Vindo a IndieLens! >---");
 			System.out.println("Para realizar o cadastro Insira seu email:");
@@ -90,7 +97,6 @@ public class Telas {
 	
 	public boolean telaPrincipal () {
 		Scanner leitor = new Scanner(System.in);
-		
 		ImprimirMensagens(1);
 		Integer opcao = leitor.nextInt();
 		
@@ -99,23 +105,28 @@ public class Telas {
 	
 	public boolean selecaoOpcao (Integer opcao) {
 		if (opcao == null || opcao > 4 || opcao < 1) {
+			gerarLog("selecionou opção Inválida: " + opcao);
 			System.err.println("Opção Inválida Tente Novamente.");
 		}
 		
 		switch (opcao) {
 			case 1 : { 
+				gerarLog("selecionou opção 1");
 				telaInstitucional(); 
 				break;
 			}
 			case 2 : { 
+				gerarLog("selecionou opção 2");
 				telaSobreNos(); 
 				break; 		
 			}
 			case 3 : { 
+				gerarLog("selecionou opção 3");
 				Conta();
 				break;
 			}
 			case 4 : {
+				gerarLog("selecionou opção 4");
 				return false;
 			}
 		}
@@ -132,8 +143,10 @@ public class Telas {
 			Integer opcao = leitorInst.nextInt();
 			
 			if (opcao == 1) {
+				gerarLog("saiu da tela institucional");
 				opcaoCorreta = false;
 			} else {
+				gerarLog("falhou em selecionar opção válida, realizando teste novamente");
 				System.err.println("opção Inválida, tente novamente");
 				System.out.println("Digite 1 para retornar a tela principal");
 				System.out.print("Seleção: ");
@@ -153,8 +166,10 @@ public class Telas {
 			Integer opcao = leitorSobre.nextInt();
 			
 			if (opcao == 1) {
+				gerarLog("saiu da sobre nós");
 				opcaoCorreta = false;
 			} else {
+				gerarLog("falhou em selecionar opção válida, realizando teste novamente");
 				System.err.println("opção Inválida, tente novamente");
 				System.out.println("Digite 1 para retornar a tela principal");
 				System.out.print("Seleção: ");
@@ -171,6 +186,7 @@ public class Telas {
 		switch (opcaoConta) {
 		case 1: {
 			if (estaLogado) {
+				gerarLog("tentou logar já estando logado");
 				System.out.println("Você já está logado!");
 			} else {
 				login(leitorConta);
@@ -180,6 +196,7 @@ public class Telas {
 		}
 		case 2: {
 			if (estaLogado) {
+				gerarLog("tentou realizar cadastro já estando logado");
 				System.out.println("Você já está logado!");
 			} else {
 				cadastro(leitorConta);
@@ -187,9 +204,11 @@ public class Telas {
 			break;
 		}
 		case 3: {
+			gerarLog("retornando a seleção de página");
 			break;
 		}
 		default:
+			gerarLog("selecionou opção inválida, tentando novamente");
 			System.err.println("Opção Inválida, tente novamente.");
 			Conta();
 			break;
@@ -199,29 +218,35 @@ public class Telas {
 	public void login(Scanner leitorConta) {
 		ImprimirMensagens(5);
 		String usuario = leitorConta.next();
+		gerarLog("inseriu email: " + usuario);
 		
 		System.out.println("Agora Insira sua Senha:");
 		System.out.println("-----------------------------");
 		System.out.print("senha: ");
 		
 		String senha = leitorConta.next();
+		gerarLog("inseriu senha: " + senha);
 		
 		if (usuario.equals(user) && senha.equals(passkey)) {
+			gerarLog("realizou login");
 			estaLogado = true;
 			System.out.println("-----------------------------");
 			System.out.println("Bem vindo " + usuario);
 			System.out.println("");
 		} else {
-			System.err.println("usuario inválido");
+			gerarLog("falhou em realizar o login, senha ou email incorreto");
+			System.err.println("usuario inválido.");
 		}
 		
 	}
 	
 	public void cadastro(Scanner leitorConta) {
 		ImprimirMensagens(6);
+		String senha = null;
 		String usuario = leitorConta.next();
 		Boolean senhasDiferentes = true;
-		String senha = null;
+		
+		gerarLog("inseriu usuário: " + usuario);
 		
 		System.out.println("Agora Insira uma Senha:");
 		System.out.println("-----------------------------");
@@ -229,15 +254,18 @@ public class Telas {
 		
 		while (senhasDiferentes) {
 			senha = leitorConta.next();
+			gerarLog("inseriu senha: " + senha);
 			System.out.println("Confirme sua senha:");
 			System.out.println("-----------------------------");
 			System.out.print("senha: ");
 				
 			String senhaconfirmacao = leitorConta.next();
+			gerarLog("inseriu confirmação de senha: " + senha);
 			
 			if (senha.equals(senhaconfirmacao)) {
 				senhasDiferentes = false;
 			} else {
+				gerarLog("senhas não coincidiram, requisitando senhas novamente");
 				System.err.println("As senhas não coincidem, tente novamente");
 				System.out.println("----------------------------------------");
 				System.out.println("Insira sua Senha:");
@@ -249,16 +277,21 @@ public class Telas {
 		user = usuario;
 		passkey = senha;
 		
+		gerarLog("criou nova conta com sucesso: usuário: " + user + "; senha: " + passkey + "");
 		login(leitorConta);
 		
 	}
 	
-	public void gerarLog() {
-		String mensagem = "";
+	public void gerarLog(String informacao) {
+		
+		LocalDateTime dataHora = LocalDateTime.now();
+		
+		String mensagem = "[" + dataHora + "] : Usuário " + informacao + ";";
 		logs.add(mensagem);
 	}
 	
 	public void invocarLogs() {
+		gerarLog("requisitou histórico de logs");
 		System.out.println("----< Histórico de ações >----");
 		for (int i = 0; i < logs.size(); i++) {
 			System.out.println(logs.get(i));
@@ -267,17 +300,11 @@ public class Telas {
 	}
 	
 	public void encerrarOperação(String confirmação) {
+		gerarLog("confirmou encerramento do programa");
 		if (confirmação.charAt(0) == 'S' || confirmação.charAt(0) == 's') {
 			invocarLogs();
 		} else {
 			System.out.println("Volte Sempre!");
 		}
 	}
-	
-	//TODO
-	//gerador de logs
-	//formato: [data] : ação
-	//log após cada ação
-	// institucional
-	// sobrenos
 }
