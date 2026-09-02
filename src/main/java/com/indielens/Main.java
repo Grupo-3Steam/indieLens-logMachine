@@ -15,12 +15,7 @@ public class Main {
 			isRunning = tela.telaPrincipal();
 		}
 
-		System.out.println("------------------------");
-		System.out.println("Deseja Imprimir os Logs? (S/N)");
-		System.out.println("------------------------");
-		String letra = leitor.next();
-		
-		tela.encerrarOperação(letra);
+		tela.encerrarOperacao(leitor);
 		
 		leitor.close();
 	}

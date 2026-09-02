@@ -303,9 +303,15 @@ public class Telas {
 		System.out.println("------------------------------");
 	}
 	
-	public void encerrarOperação(String confirmação) {
-		gerarLog("confirmou encerramento do programa");
-		if (confirmação.charAt(0) == 'S' || confirmação.charAt(0) == 's') {
+	public void encerrarOperacao(Scanner leitor) {
+		gerarLog("iniciou o encerramento do programa");
+		System.out.println("------------------------");
+		System.out.println("Deseja Imprimir os Logs? (S/N)");
+		System.out.println("------------------------");
+		String letra = leitor.next();
+		
+		if (letra.charAt(0) == 'S' || letra.charAt(0) == 's') {
+			gerarLog("confirmou o encerramento do programa");
 			invocarLogs();
 		} else {
 			System.out.println("Volte Sempre!");
